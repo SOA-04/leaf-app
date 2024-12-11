@@ -17,6 +17,7 @@ module Leaf
     plugin :halt
     plugin :flash
     plugin :all_verbs
+    plugin :multi_route
     use Rack::MethodOverride
 
     # Configure Rack::Session for cookie-based session management
@@ -38,6 +39,8 @@ module Leaf
 
       begin
         setup_routes(routing)
+
+        routing.multi_route
       rescue StandardError => error # rubocop:disable Naming/RescuedExceptionsVariableName
         App.logger.error error.backtrace.join("\n")
         flash[:error] = MESSAGES[:route_error]
@@ -52,7 +55,7 @@ module Leaf
       setup_root(routing)
       Leaf::LocationRoutes.setup(routing)
       Leaf::TripRoutes.setup(routing)
-      Leaf::QueryRoutes.setup(routing)
+      # Leaf::QueryRoutes.setup(routing)
     end
 
     def setup_root(routing) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
