@@ -8,12 +8,9 @@ html
 
     / TailwindCSS
     script src="https://cdn.tailwindcss.com"
-    <!-- Remember to include jQuery :) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
-    <!-- ToasterJS -->
-    <script src="https://raw.githubusercontent.com/rosshatokay/toasterjs/main/src/toaster.js"></script>
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/rosshatokay/toasterjs/main/src/toaster.css" />
+    / Swal2
+    script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
     javascript:
       function toggleMenu() {
         var menu = document.getElementById('navbar-default');
@@ -32,9 +29,39 @@ html
         }
       });
 
+      const Toast = Swal.mixin({
+        toast: true,
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        position: 'bottom-end',
+      });
 
   body.flex.flex-col.h-screen.justify-between
-
+    - if flash[:error]
+      javascript:
+        document.addEventListener('DOMContentLoaded', async () => {
+          await Toast.fire({
+            icon: 'error',
+            title: '#{flash[:error]}',
+          })
+        });
+    - if flash[:success]
+      javascript:
+        document.addEventListener('DOMContentLoaded', async () => {
+          await Toast.fire({
+            icon: 'success',
+            title: '#{flash[:success]}',
+          })
+        });
+    - if flash[:notice]
+      javascript:
+        document.addEventListener('DOMContentLoaded', async () => {
+          await Toast.fire({
+            icon: 'info',
+            title: '#{flash[:notice]}',
+          })
+        });
 
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class="container mx-auto  flex flex-wrap items-center justify-between mx-auto p-4">
