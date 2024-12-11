@@ -12,8 +12,10 @@ gem 'securerandom'
 
 # Web Application
 gem 'logger', '~> 1.6'
+gem 'multi_json', '~> 1.15'
 gem 'puma', '~> 6.4'
 gem 'rack-session', '~> 0.3'
+gem 'roar', '~> 1.2'
 gem 'roda', '~> 3.85'
 gem 'slim', '~> 5.2'
 
@@ -23,6 +25,7 @@ gem 'dry-struct', '~> 1.6'
 gem 'dry-transaction', '~> 0.16.0'
 gem 'dry-types', '~> 1.7'
 gem 'dry-validation', '~> 1.10'
+gem 'ostruct', '~> 0.6.1'
 
 # Network dependency
 gem 'http'

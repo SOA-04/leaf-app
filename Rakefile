@@ -11,7 +11,7 @@ end
 
 desc 'Run Development Server'
 task :run do
-  sh 'bundle exec puma'
+  sh 'bundle exec puma -p 9000'
 end
 
 desc 'run specs'
@@ -26,7 +26,7 @@ end
 
 desc 'Keep rerunning web app upon changes'
 task :rerun do
-  sh "rerun -c --ignore 'coverage/*' -- bundle exec puma"
+  sh "rerun -c --ignore 'coverage/*' -- bundle exec puma -p 9000"
 end
 
 desc 'Run application console'
