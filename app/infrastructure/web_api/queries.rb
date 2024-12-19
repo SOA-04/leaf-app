@@ -16,7 +16,8 @@ module Leaf
       def get_query(id)
         response = @http.get("/queries/#{id}")
 
-        Response.new(response).handle_error("by WebAPI::Query::Get, status: #{response.status}")
+        Response.new(response)
+                .handle_error("by Query::Get, status: #{response.status}, message: #{response.parse['message']}")
       end
 
       # Given 2 points and the travel strategy, obtain the distance and travel time.
@@ -31,7 +32,8 @@ module Leaf
                                 strategy: strategy
                               })
 
-        Response.new(response).handle_error("by WebAPI::Query::Create, status: #{response.status}")
+        Response.new(response)
+                .handle_error("by Query::Create, status: #{response.status}, message: #{response.parse['message']}")
       end
     end
   end
